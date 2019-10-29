@@ -10,7 +10,7 @@ const NewsBlock = ({ newsItem }) => {
   const id = newsItem.guid['#text'].split('/')[4]
   
   return (
-    <Link to={`/${id}`} className='news-item'>
+    <Link to={{pathname:`/${id}`, state: {news: newsItem}}} className='news-item'>
       <div className="content">
         <span>{newsItem.title}</span>
         <div className="date">
