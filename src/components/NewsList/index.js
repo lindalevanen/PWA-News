@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { Header } from '../common/Header.js'
 import './index.scss'
 
 import { getArticles, loadMoreArticles } from '../../NewsService.js'
@@ -58,12 +59,15 @@ class NewsList extends React.Component {
     const { items } = this.state
 
     return (
-      <div className='news-list'>
-        {items.map(item => (
-          <NewsBlock item={item} key={item.id} />
-        ))}
-        <button onClick={() => !this.state.loading && this.loadMore()}>Load more</button>
-      </div>
+      <>
+        <Header />
+        <div className='news-list'>
+          {items.map(item => (
+            <NewsBlock item={item} key={item.id} />
+          ))}
+          <button onClick={() => !this.state.loading && this.loadMore()}>Load more</button>
+        </div>
+      </>
     )
   }
 }
