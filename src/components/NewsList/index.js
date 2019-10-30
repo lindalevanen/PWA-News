@@ -1,7 +1,29 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import './index.scss'
 
 import { getArticles, loadMoreArticles } from '../../NewsService.js'
+
+const NewsBlock = ({ item }) => {
+  const date = new Date(item.publish_date)
+  const parsedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+  const parsedTime = `${date.getHours()}.${date.getMinutes()}`
+  
+  return (
+    <Link to={`/${item.id}`} className='news-item'>
+      <div className="content">
+        <span>{item.deck}</span>
+        <div className="date">
+          <span>{parsedDate} </span>
+          <span>{parsedTime}</span>
+        </div>
+      </div>
+      <div className="image-container">
+        <img src={item.image.square_tiny} className="thumbnail" alt="thumbnail" />
+      </div>
+    </Link>
+  )
+}
 
 class NewsList extends React.Component {
   constructor(props) {
@@ -25,27 +47,17 @@ class NewsList extends React.Component {
         amount: prevState.amount + 5
       }))
     })
-  }
-
+  }  
   render() {
+    const { items } = this.state
+
     return (
-      <div>
-        <ul>
-          {this.state.items.map((item) => (
-            <li key={item.id} style={{marginBottom: '10px'}}>
-              <img src={item.image.square_tiny} alt='' />
-              <div>
-                <span>{item.publish_date}</span>
-              </div>
-              <div>
-                <Link to={`/${item.id}`}>{item.deck}</Link>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <div className='news-list'>
+        {items.map(item => (
+          <NewsBlock item={item} key={item.id} />
+        ))}
         <button onClick={this.loadMore}>Load more</button>
       </div>
-  
     )
   }
 }

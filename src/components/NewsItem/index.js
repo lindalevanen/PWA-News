@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.scss'
 
 import { getArticleDetails } from '../../NewsService.js'
 
@@ -16,20 +17,24 @@ class NewsItem extends React.Component {
     })
   }
 
-  createMarkup = (html) => (
-      {__html: html}
-  )
-
   render() {
+    const { article } = this.state
+    const date = new Date(article.publish_date)
+    const parsedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+    const parsedTime = `${date.getHours()}.${date.getMinutes()}`
+  
     return (
-      <div>
-        {this.state.article && (
-          <>
-            <h1>{this.state.article.deck}</h1>
-            <div dangerouslySetInnerHTML={this.createMarkup(this.state.article.body)} />
-          </>
-        )}
-      </div>
+      article && (
+        <div className="news-wrapper">
+          <div className="title">{article.deck}</div>
+          <div className="date">
+              <span>{parsedDate}</span>
+              <span>{parsedTime}</span>
+          </div>
+          {/*<img src={newsItem.enclosure["-url"]} className="thumbnail" alt="thumbnail" />*/}
+          <div dangerouslySetInnerHTML={{__html: article.body}}/>;
+        </div>
+      )
     )
   }
 };

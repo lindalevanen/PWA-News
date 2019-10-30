@@ -7,7 +7,7 @@ import {
 
 import NewsItem from './components/NewsItem'
 import NewsList from './components/NewsList'
-import './index.css';
+import './index.scss';
 
 class Routes extends React.Component {
   render() {
