@@ -30,24 +30,29 @@ class NewsList extends React.Component {
     super(props)
     this.state = {
       items: [],
-      amount: 5
+      amount: 5,
+      loading: false
     }
   }
 
   componentDidMount() {
+    this.setState({loading: true})
     getArticles().then(res => {
-      this.setState({ items: res })
+      this.setState({ items: res, loading: false })
     })
   }
 
   loadMore = () => {
+    this.setState({loading: true})
     loadMoreArticles(this.state.amount).then(res => {
       this.setState(prevState => ({
         items: prevState.items.concat(res),
-        amount: prevState.amount + 5
+        amount: prevState.amount + 5,
+        loading: false
       }))
     })
-  }  
+  }
+
   render() {
     const { items } = this.state
 
@@ -56,7 +61,7 @@ class NewsList extends React.Component {
         {items.map(item => (
           <NewsBlock item={item} key={item.id} />
         ))}
-        <button onClick={this.loadMore}>Load more</button>
+        <button onClick={() => !this.state.loading && this.loadMore()}>Load more</button>
       </div>
     )
   }
