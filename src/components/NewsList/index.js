@@ -19,7 +19,7 @@ const NewsBlock = ({ item }) => {
         </div>
       </div>
       <div className="image-container">
-        <img src={item.image.square_tiny} className="thumbnail" alt="thumbnail" />
+        <img src={item.image.screen_tiny} className="thumbnail" alt="thumbnail" />
       </div>
     </Link>
   )

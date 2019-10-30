@@ -29,6 +29,10 @@
     height: 100px;
     max-width: 205px;
     margin-left: 10px;
+
+    & > img {
+      max-width: 160px;
+    }
   }
 
   .content {
