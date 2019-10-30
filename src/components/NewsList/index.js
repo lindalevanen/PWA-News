@@ -44,7 +44,8 @@ class NewsList extends React.Component {
 
   loadMore = () => {
     this.setState({loading: true})
-    loadMoreArticles(this.state.amount).then(res => {
+    const firstPostPubDate = this.state.items[0].publish_date.trim().replace(' ', 'T')
+    loadMoreArticles(this.state.amount, firstPostPubDate).then(res => {
       this.setState(prevState => ({
         items: prevState.items.concat(res),
         amount: prevState.amount + 5,
