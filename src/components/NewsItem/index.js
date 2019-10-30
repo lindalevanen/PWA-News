@@ -27,12 +27,13 @@ class NewsItem extends React.Component {
       <>
         {article && (
           <div className="news-wrapper">
-            <div className="title">{article.deck}</div>
+            <div className="title">{article.title}</div>
+            <div className="description">{article.deck}</div>
             <div className="date">
                 <span>{parsedDate}</span>
                 <span>{parsedTime}</span>
             </div>
-            {/*<img src={newsItem.enclosure["-url"]} className="thumbnail" alt="thumbnail" />*/}
+            <img src={article.image.original} className="thumbnail" alt="thumbnail" />
             <div dangerouslySetInnerHTML={{__html: article.body}}/>
           </div>
         )}

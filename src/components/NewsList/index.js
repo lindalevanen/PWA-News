@@ -12,7 +12,7 @@ const NewsBlock = ({ item }) => {
   return (
     <Link to={`/${item.id}`} className='news-item'>
       <div className="content">
-        <span>{item.deck}</span>
+        <span>{item.title}</span>
         <div className="date">
           <span>{parsedDate} </span>
           <span>{parsedTime}</span>
