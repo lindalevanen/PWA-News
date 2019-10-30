@@ -9,13 +9,17 @@ import NewsItem from './components/NewsItem'
 import NewsList from './components/NewsList'
 import './index.css';
 
-const Routes = () => (
-  <Router>
-    <Switch>
-      <Route path="/:newsItemId" component={NewsItem} />
-      <Route path="/" component={NewsList} />
-    </Switch>
-  </Router>
-);
+class Routes extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/:articleId" component={NewsItem} />
+          <Route path="/" component={NewsList} />
+        </Switch>
+      </Router>
+    )
+  }
+}
 
 export default Routes;
