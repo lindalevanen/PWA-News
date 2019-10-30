@@ -14,6 +14,7 @@ export const getArticles = () => {
       }
     })
     .then(res => {
+      console.log("Loaded news: ", res.results)
       return res.results
     })
     .catch(err => {
@@ -29,6 +30,7 @@ export const loadMoreArticles = (currentAmount) => {
       }
     })
     .then(res => {
+      console.log("Loaded more: ", res.results)
       return res.results
     })
     .catch(err => {
@@ -44,6 +46,7 @@ export const getArticleDetails = (id) => {
     }
   })
   .then(res => {
+    console.log("Loaded details: ", res.results[0])
     return res.results[0]
   })
   .catch(err => {

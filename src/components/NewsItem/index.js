@@ -19,22 +19,24 @@ class NewsItem extends React.Component {
 
   render() {
     const { article } = this.state
-    const date = new Date(article.publish_date)
+    const date = new Date(article && article.publish_date)
     const parsedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
     const parsedTime = `${date.getHours()}.${date.getMinutes()}`
   
     return (
-      article && (
-        <div className="news-wrapper">
-          <div className="title">{article.deck}</div>
-          <div className="date">
-              <span>{parsedDate}</span>
-              <span>{parsedTime}</span>
+      <>
+        {article && (
+          <div className="news-wrapper">
+            <div className="title">{article.deck}</div>
+            <div className="date">
+                <span>{parsedDate}</span>
+                <span>{parsedTime}</span>
+            </div>
+            {/*<img src={newsItem.enclosure["-url"]} className="thumbnail" alt="thumbnail" />*/}
+            <div dangerouslySetInnerHTML={{__html: article.body}}/>
           </div>
-          {/*<img src={newsItem.enclosure["-url"]} className="thumbnail" alt="thumbnail" />*/}
-          <div dangerouslySetInnerHTML={{__html: article.body}}/>;
-        </div>
-      )
+        )}
+      </>
     )
   }
 };
