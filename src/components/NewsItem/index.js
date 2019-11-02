@@ -1,4 +1,5 @@
 import React from 'react';
+import { Header } from '../common/Header.js'
 import './index.scss'
 
 import { getArticleDetails } from '../../NewsService.js'
@@ -25,6 +26,7 @@ class NewsItem extends React.Component {
   
     return (
       <>
+        <Header />
         {article && (
           <div className="news-wrapper">
             <div className="title">{article.title}</div>
