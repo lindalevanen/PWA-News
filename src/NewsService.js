@@ -2,9 +2,20 @@
  * The articles are fetched from the Gamespot API https://www.gamespot.com/api/documentation#toc-0-4
  */
 
-const ARTICLES_URL = 'https://www.gamespot.com/api/articles/?api_key=ac0502dc50b611ff44da3ee2590724945af3e305&format=json&sort=publish_date:desc&limit=5'
+const ARTICLES_URL = (
+  'https://www.gamespot.com/api/articles/' +
+  '?api_key=ac0502dc50b611ff44da3ee2590724945af3e305' +
+  '&format=json' +
+  '&sort=publish_date:desc' +
+  '&limit=5'
+)
 
-const ARTICLE_DETAILS_URL = 'https://www.gamespot.com/api/articles/?api_key=ac0502dc50b611ff44da3ee2590724945af3e305&format=json&filter=id::id'
+const ARTICLE_DETAILS_URL = (
+  'https://www.gamespot.com/api/articles/' +
+  '?api_key=ac0502dc50b611ff44da3ee2590724945af3e305' +
+  '&format=json' +
+  '&filter=id::id'
+)
 const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 
 export const getArticles = () => {
