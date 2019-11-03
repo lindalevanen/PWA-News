@@ -4,7 +4,7 @@ import Loader from '../common/Loader'
 
 import './index.scss'
 
-import { getArticles, loadMoreArticles } from '../../NewsService.js'
+import { getArticles, loadMoreArticles, ITEM_LIMIT } from '../../NewsService.js'
 
 const NewsLine = ({ item }) => {
   const date = new Date(item.publish_date)
@@ -32,7 +32,7 @@ class NewsList extends React.Component {
     super(props)
     this.state = {
       items: [],
-      amount: 5,
+      amount: ITEM_LIMIT,
       loading: false,
       firstPatchReady: false
     }
@@ -54,7 +54,7 @@ class NewsList extends React.Component {
       if(res) {
         this.setState(prevState => ({
           items: prevState.items.concat(res),
-          amount: prevState.amount + 5,
+          amount: prevState.amount + ITEM_LIMIT,
           loading: false
         }))  
       }

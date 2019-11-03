@@ -21,7 +21,10 @@
   }
 
   img {
+    display: block;
     width: 100%;
+    max-width: 750px;
+    margin: auto;
     height: auto;
   }
 
@@ -33,6 +36,10 @@
   }
 
   iframe {
+    display: block;
+    margin: auto;
     height: 250px;
+    max-width: 750px;
+
   }
 }
