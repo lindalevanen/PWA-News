@@ -1,20 +1,23 @@
 import React from 'react';
-import { Header } from '../common/Header.js'
 import './index.scss'
 
 import { getArticleDetails } from '../../NewsService.js'
+import { fixHTMLDomains } from '../utils.js'
 
 class NewsItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      article: undefined
+      article: undefined,
     }
   }
 
   componentDidMount() {
     getArticleDetails(this.props.match.params.articleId).then(res => {
-      this.setState({article: res})
+      if(res) {
+        const fixedHTML = fixHTMLDomains(res.body)
+        this.setState({article: {...res, body: fixedHTML}})
+      }
     })
   }
 
@@ -26,7 +29,6 @@ class NewsItem extends React.Component {
   
     return (
       <>
-        <Header />
         {article && (
           <div className="news-wrapper">
             <div className="title">{article.title}</div>

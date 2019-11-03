@@ -1,6 +1,9 @@
 .news-wrapper {
-  margin-top: 60px;
   padding: 1em;
+
+  * {
+    max-width: 100%;
+  }
 
   .title {
     font-size: 24px;
@@ -20,5 +23,12 @@
   img {
     width: 100%;
     height: auto;
+  }
+
+  /* Overrides for the elements in news item body: */
+
+  figure {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
