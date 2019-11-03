@@ -9,20 +9,18 @@ const API_DOMAIN = 'https://www.gamespot.com'
 export const fixHTMLDomains = (html) => {
   var tempDiv = document.createElement('div');
   tempDiv.innerHTML = html;
-  const atags = tempDiv.getElementsByTagName('a')
-  for (let i = 0; i < atags.length; i++) {
-    const href = atags[i].getAttribute('href')
-    if(href[0] === '/') { // Relative domain, change it
-      atags[i].setAttribute('href', API_DOMAIN  + href)
-    }
-  }
-  const possibleiFrames = tempDiv.getElementsByTagName('iframe')
-  if(possibleiFrames.length === 1) {
-    const iframeSrc = possibleiFrames[0].getAttribute('src')
-    if(iframeSrc[0] === '/') {  // Relative domain, change it
-      possibleiFrames[0].setAttribute('src', API_DOMAIN + iframeSrc)
-    }
-  }
+  fixTagDomains(tempDiv, 'a', 'href')
+  fixTagDomains(tempDiv, 'iframe', 'src')
 
   return tempDiv.innerHTML
+}
+
+const fixTagDomains = (rootEl, tag, srcAttrName) => {
+  const tags = rootEl.getElementsByTagName(tag)
+  for (let i = 0; i < tags.length; i++) {
+    const src = tags[i].getAttribute(srcAttrName)
+    if(src[0] === '/') { // Relative domain, change it
+      tags[i].setAttribute(srcAttrName, API_DOMAIN  + src)
+    }
+  }
 }
