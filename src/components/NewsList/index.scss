@@ -1,8 +1,6 @@
 .news-list {
   display: flex;
   flex-direction: column;
-  background-color: rgb(233, 234, 237);
-  margin-top: 60px;
 
   a:link {
     text-decoration: none;
@@ -36,7 +34,7 @@
     }
   }
 
-  .content {
+  .line-content {
     display: flex;
     flex-direction: column;
     flex: 2;
@@ -46,5 +44,11 @@
       font-size: 12px;
       color: gray;
     }
+  }
+
+  .load-more-button {
+    background-color: #2993bb;
+    padding: 10px 0;
+    margin: 10px 40px;
   }
 }
