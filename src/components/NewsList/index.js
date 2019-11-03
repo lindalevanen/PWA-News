@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Header } from '../common/Header.js'
+import Loader from '../common/Loader'
+
 import './index.scss'
 
 import { getArticles, loadMoreArticles } from '../../NewsService.js'
 
-const NewsBlock = ({ item }) => {
+const NewsLine = ({ item }) => {
   const date = new Date(item.publish_date)
   const parsedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
   const parsedTime = `${date.getHours()}.${date.getMinutes()}`
   
   return (
     <Link to={`/${item.id}`} className='news-item'>
-      <div className="content">
+      <div className="line-content">
         <span>{item.title}</span>
         <div className="date">
           <span>{parsedDate} </span>
@@ -32,14 +33,17 @@ class NewsList extends React.Component {
     this.state = {
       items: [],
       amount: 5,
-      loading: false
+      loading: false,
+      firstPatchReady: false
     }
   }
 
   componentDidMount() {
     this.setState({loading: true})
     getArticles().then(res => {
-      this.setState({ items: res, loading: false })
+      if(res) {
+        this.setState({ items: res, loading: false, firstPatchReady: true })
+      }
     })
   }
 
@@ -47,11 +51,13 @@ class NewsList extends React.Component {
     this.setState({loading: true})
     const firstPostPubDate = this.state.items[0].publish_date.trim().replace(' ', 'T')
     loadMoreArticles(this.state.amount, firstPostPubDate).then(res => {
-      this.setState(prevState => ({
-        items: prevState.items.concat(res),
-        amount: prevState.amount + 5,
-        loading: false
-      }))
+      if(res) {
+        this.setState(prevState => ({
+          items: prevState.items.concat(res),
+          amount: prevState.amount + 5,
+          loading: false
+        }))  
+      }
     })
   }
 
@@ -60,12 +66,18 @@ class NewsList extends React.Component {
 
     return (
       <>
-        <Header />
+        <Loader loading={this.state.loading} />
         <div className='news-list'>
           {items.map(item => (
-            <NewsBlock item={item} key={item.id} />
+            <NewsLine item={item} key={item.id} />
           ))}
-          <button onClick={() => !this.state.loading && this.loadMore()}>Load more</button>
+          {this.state.firstPatchReady && (
+            <button 
+              className='load-more-button'
+              onClick={() => !this.state.loading && this.loadMore()}>
+              Load more
+            </button>
+          )}
         </div>
       </>
     )
