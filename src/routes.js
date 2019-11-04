@@ -5,17 +5,25 @@ import {
   Route,
 } from "react-router-dom";
 
+import BaseLayout from './components/BaseLayout'
 import NewsItem from './components/NewsItem'
 import NewsList from './components/NewsList'
-import './index.css';
+import './index.scss';
 
-const Routes = () => (
-  <Router>
-    <Switch>
-      <Route path="/:newsItemId" component={NewsItem} />
-      <Route path="/" component={NewsList} />
-    </Switch>
-  </Router>
-);
+class Routes extends React.Component {
+  render() {
+    return (
+      <Router>
+        <BaseLayout>
+          <Switch>
+            <Route path="/:articleId" component={NewsItem} />
+            <Route path="/" component={NewsList} />
+          </Switch>
+
+        </BaseLayout>
+      </Router>
+    )
+  }
+}
 
 export default Routes;

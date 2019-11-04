@@ -1,0 +1,45 @@
+.news-wrapper {
+  padding: 1em;
+
+  * {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .description {
+    font-size: 18px;
+    margin: 0.5em 0;
+  }
+
+  .date {
+    font-size: 12px;
+    color: gray;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+    height: auto;
+  }
+
+  /* Overrides for the elements in news item body: */
+
+  figure {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  iframe {
+    display: block;
+    margin: auto;
+    height: 250px;
+    max-width: 750px;
+
+  }
+}
