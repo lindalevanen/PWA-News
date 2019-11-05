@@ -19,7 +19,7 @@ const fixTagDomains = (rootEl, tag, srcAttrName) => {
   const tags = rootEl.getElementsByTagName(tag)
   for (let i = 0; i < tags.length; i++) {
     const src = tags[i].getAttribute(srcAttrName)
-    if(src[0] === '/') { // Relative domain, change it
+    if(src && src[0] === '/' && src[1] !== '/') { // Relative domain, change it. With // apparently it's just https or something
       tags[i].setAttribute(srcAttrName, API_DOMAIN  + src)
     }
   }
