@@ -1,11 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
 .base-wrapper {
   display: flex; 
   height: 100vh;
   flex-direction: column;
 
+  margin: 0 auto;
+  max-width: 50em;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  color: #333;
+
   & > .content {
     flex: 1;
-    background-color: #e9eaed;
+    background-color: #eee;
   }
 
   footer {
