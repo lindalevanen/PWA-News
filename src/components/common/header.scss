@@ -1,6 +1,5 @@
 .header-wrapper {
   .header {
-    position: fixed;
     width: 100%;
     top: 0;
     z-index: 100;
@@ -13,6 +12,7 @@
       font-family: 'titling', sans-serif;
       line-height: 60px;
       font-size: 32px;
+      color: black;
     }
   }
   
