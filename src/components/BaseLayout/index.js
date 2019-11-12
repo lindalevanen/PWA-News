@@ -9,6 +9,7 @@ const BaseLayout = (props) => (
     <div className='content'>
       {props.children}
     </div>
+    <footer>Powered by GameSpot</footer>
   </div>
 )
 
