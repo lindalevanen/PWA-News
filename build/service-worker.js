@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 /**
  * Welcome to your Workbox-powered service worker!
  *
@@ -16,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.e19d551eb5437027e97af4a1eaefba71.js"
+  "/precache-manifest.648fe1aaa8824360f79cbee4bfa54743.js"
 );
 
 self.addEventListener('message', (event) => {
