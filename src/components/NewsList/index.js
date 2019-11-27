@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import Loader from '../common/Loader'
 
@@ -39,21 +40,27 @@ class NewsList extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({loading: true})
-    getArticles().then(res => {
-      if(res) {
-        this.setState({ items: res, loading: false, firstPatchReady: true })
-      }
-    })
+    const { news } = this.props
+    if(news.length === 0) {
+      this.setState({loading: true})
+      getArticles().then(res => {
+        if(res) {
+          this.setState({ loading: false, firstPatchReady: true })
+          this.props.loadedNews(res)
+        }
+      })
+    } else {
+      this.setState({ firstPatchReady: true })
+    }
   }
 
   loadMore = () => {
     this.setState({loading: true})
-    const firstPostPubDate = this.state.items[0].publish_date.trim().replace(' ', 'T')
+    const firstPostPubDate = this.props.news[0].publish_date.trim().replace(' ', 'T')
     loadMoreArticles(this.state.amount, firstPostPubDate).then(res => {
       if(res) {
+        this.props.loadedNews(res)
         this.setState(prevState => ({
-          items: prevState.items.concat(res),
           amount: prevState.amount + ITEM_LIMIT,
           loading: false
         }))  
@@ -62,13 +69,13 @@ class NewsList extends React.Component {
   }
 
   render() {
-    const { items } = this.state
+    const { news } = this.props
 
     return (
       <>
         <Loader loading={this.state.loading} />
         <div className='news-list'>
-          {items.map(item => (
+          {news.map(item => (
             <NewsLine item={item} key={item.id} />
           ))}
           {this.state.firstPatchReady && (
@@ -84,4 +91,16 @@ class NewsList extends React.Component {
   }
 }
 
-export default NewsList;
+const mapStateToProps = state => {
+  return {
+    news: state.news
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadedNews: (news) => dispatch({type: "SET_NEWS", news: news})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList)
