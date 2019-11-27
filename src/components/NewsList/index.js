@@ -49,6 +49,8 @@ class NewsList extends React.Component {
           this.props.loadedNews(res)
         }
       })
+    } else {
+      this.setState({ firstPatchReady: true })
     }
   }
 
