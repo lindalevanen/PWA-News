@@ -28,6 +28,7 @@ class NewsItem extends React.Component {
     } else {
       this.setState({article: newsItem})
     }
+    window.scrollTo(0,0)
   }
 
   render() {
