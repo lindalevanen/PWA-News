@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import './index.scss'
 
 import { getArticleDetails } from '../../NewsService.js'
@@ -13,12 +14,21 @@ class NewsItem extends React.Component {
   }
 
   componentDidMount() {
-    getArticleDetails(this.props.match.params.articleId).then(res => {
-      if(res) {
-        const fixedHTML = fixHTMLDomains(res.body)
-        this.setState({article: {...res, body: fixedHTML}})
-      }
-    })
+    const { articleId } = this.props.match.params
+
+    const newsItem = this.props.news.find(newsItem => newsItem.id.toString() === articleId)
+
+    if(!newsItem) {
+      getArticleDetails(articleId).then(res => {
+        if(res) {
+          const fixedHTML = fixHTMLDomains(res.body)
+          this.setState({article: {...res, body: fixedHTML}})
+        }
+      })
+    } else {
+      this.setState({article: newsItem})
+    }
+    window.scrollTo(0, 0)
   }
 
   render() {
@@ -46,4 +56,11 @@ class NewsItem extends React.Component {
   }
 };
 
-export default NewsItem;
+const mapStateToProps = state => {
+  return {
+    news: state.news
+  }
+}
+
+export default connect(mapStateToProps)(NewsItem)
+
