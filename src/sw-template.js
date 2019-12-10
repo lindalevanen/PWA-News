@@ -37,6 +37,11 @@ if (workbox) {
   );
 
   workbox.routing.registerRoute(
+    new RegExp('https://gamespot1\\.cbsistatic\\.com.*\\.jpg|jpeg|png|jfif'),
+    new workbox.strategies.NetworkFirst()
+  );
+
+  workbox.routing.registerRoute(
     /\.(?:png|gif|jpg|jpeg)$/,
     workbox.strategies.cacheFirst({
       cacheName: "images",
