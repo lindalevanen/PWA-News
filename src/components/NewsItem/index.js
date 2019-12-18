@@ -35,8 +35,13 @@ class NewsItem extends React.Component {
     const { article } = this.state
     const date = new Date(article && article.publish_date)
     const parsedDate = `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
-    const parsedTime = `${date.getHours()}.${date.getMinutes()}`
+
+    const zeroInFront = str => Number(str) < 10 ? `0${Number(str)}` : Number(str)
   
+    const hh = zeroInFront(date.getHours())
+    const mm = zeroInFront(date.getMinutes())
+    const parsedTime = `${hh}.${mm}`
+    
     return (
       <>
         {article && (
@@ -44,7 +49,7 @@ class NewsItem extends React.Component {
             <div className="title">{article.title}</div>
             <div className="description">{article.deck}</div>
             <div className="date">
-                <span>{parsedDate}</span>
+                <span>{parsedDate} </span>
                 <span>{parsedTime}</span>
             </div>
             <img src={article.image.original} className="thumbnail" alt="thumbnail" />
