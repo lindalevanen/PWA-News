@@ -33,17 +33,32 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     "https://cors-anywhere.herokuapp.com/https://www.gamespot.com/api/articles/?api_key=ac0502dc50b611ff44da3ee2590724945af3e305&format=json&sort=publish_date:desc&limit=10",
-    new workbox.strategies.NetworkFirst()
+    new workbox.strategies.NetworkFirst({
+      cacheName: "articles",
+      plugins: [
+        new workbox.expiration.Plugin({
+          maxEntries: 60,
+          maxAgeSeconds: 60 * 60 // 60 minutes
+        })
+      ]
+    })
   );
 
   workbox.routing.registerRoute(
-    new RegExp('https://gamespot1\\.cbsistatic\\.com.*\\.jpg|jpeg|png|jfif'),
-    new workbox.strategies.NetworkFirst()
+    new RegExp("https://gamespot1\\.cbsistatic\\.com.*\\.(jpg|jpeg|png|jfif)"),
+    new workbox.strategies.CacheFirst({
+      cacheName: "gamespot-images",
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [0, 200]
+        })
+      ]
+    })
   );
 
   workbox.routing.registerRoute(
-    /\.(?:png|gif|jpg|jpeg)$/,
-    workbox.strategies.cacheFirst({
+    /\.(?:png|gif|jpg|jpeg|ttf|js)$/,
+    new workbox.strategies.CacheFirst({
       cacheName: "images",
       plugins: [
         new workbox.expiration.Plugin({
