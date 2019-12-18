@@ -34,7 +34,7 @@ class NewsItem extends React.Component {
   render() {
     const { article } = this.state
     const date = new Date(article && article.publish_date)
-    const parsedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+    const parsedDate = `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
     const parsedTime = `${date.getHours()}.${date.getMinutes()}`
   
     return (
