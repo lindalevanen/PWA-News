@@ -110,7 +110,7 @@
 	"start_url" : "https://pwa-news-app.herokuapp.com/",
 	"display" : "standalone",
 	"theme_color" : "#2993bb",
-	"background_color" : "#ffffff",
+	"background_color" : "#2993bb",
   "lang" : "",
   "scope": "/",
 	"screenshots" : [],
