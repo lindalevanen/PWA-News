@@ -9,8 +9,14 @@ import { getArticles, loadMoreArticles, ITEM_LIMIT } from '../../NewsService.js'
 
 const NewsLine = ({ item }) => {
   const date = new Date(item.publish_date)
-  const parsedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
-  const parsedTime = `${date.getHours()}.${date.getMinutes()}`
+  const parsedDate = `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+  
+  const zeroInFront = str => Number(str) < 10 ? `0${Number(str)}` : Number(str)
+  
+  const hh = zeroInFront(date.getHours())
+  const mm = zeroInFront(date.getMinutes())
+  const parsedTime = `${hh}.${mm}`
+
   
   return (
     <Link to={`/${item.id}`} className='news-item'>
